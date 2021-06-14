@@ -102,7 +102,7 @@ func (e *employees) findRootEmployee() *Employee {
 
 // Recursively prints an Employee that manages and prints all Employee that reports to them
 func (e *employees) printManager(manager *Employee) {
-	fmt.Printf(manager.Name + "\n")
+	// fmt.Printf(manager.Name + "\n")
 	// If an Employee manages two or more Employee entities, we sort before printing
 	if len(manager.Manages) > 0 {
 		fmt.Printf("Employees of: %s\n", manager.Name)
@@ -133,6 +133,8 @@ func (e *employees) printEmployeeStructure() error {
 	if manager == nil {
 		return fmt.Errorf("cannot find top-level employee")
 	}
+	// Print the top-level Employee name
+	fmt.Printf(manager.Name + "\n")
 	e.printManager(manager)
 	return nil
 }
@@ -170,9 +172,6 @@ func main() {
 
 	// Set relationships between Employee
 	employees.setRelations()
-
-	e, _ := employees.getEmployee("Jeff")
-	fmt.Printf("%v", e)
 
 	// Print the Employees
 	err = employees.printEmployeeStructure()
