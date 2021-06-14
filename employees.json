@@ -1,0 +1,9 @@
+{
+  "Jeff": { "name": "Jeff", "salary": 200000 },
+  "Dave": { "name": "Dave", "salary": 150000, "manager_name": "Jeff" },
+  "Andy": { "name": "Andy", "salary": 100000, "manager_name": "Dave" },
+  "Dan": { "name": "Dan", "salary": 100000, "manager_name": "Dave" },
+  "Jason": { "name": "Jason", "salary": 100000, "manager_name": "Dave" },
+  "Rick": { "name": "Rick", "salary": 100000, "manager_name": "Dave" },
+  "Suzanne": { "name": "Suzanne", "salary": 100000, "manager_name": "Dave" }
+}
