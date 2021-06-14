@@ -36,6 +36,38 @@ A JSON file of the following format:
 }
 ```
 
+## Actual Output
+```
+Jeff
+Employees of: Jeff
+        Dave
+Employees of: Dave
+        Andy
+        Dan
+        Jason
+        Rick
+        Suzanne
+Total salary: 850000.00
+```
+
+### Output with multi-level hierarchy
+```
+Jeff
+Employees of: Jeff
+        Dave
+Employees of: Dave
+        Andy
+        Dan
+Employees of: Dan
+        Jason
+        Rick
+Employees of: Rick
+        Suzanne
+Total salary: 850000.00
+```
+Caveat(s):
+- Did not add tests to detect cycles.
+
 ## Getting started and testing:
 
 You can test this by running:
