@@ -100,34 +100,6 @@ func (e *employees) findRootEmployee() *Employee {
 	return nil
 }
 
-// func (e *employees) createVisited() map[string]bool {
-//     visited := make(map[string]bool, len(e.data))
-//     for k := range e.data {
-//         visited[k] = false
-//     }
-//     return visited
-// }
-
-// func (e *employees) BFS(startingNode *Employee) {
-// 	visited := e.createVisited()
-// 	var q []string
-
-// 	visited[startingNode.Name] = true
-// 	q = append(q, startingNode.Name)
-
-// 	for len(q) > 0 {
-// 		var current string
-// 		current, q = q[0], q[1:]
-// 		fmt.Println("BFS", current)
-// 		for _, node := range e.data[current].Manages {
-// 			if !visited[node.Name] {
-// 				q = append(q, node.Name)
-// 				visited[node.Name] = true
-// 			}
-// 		}
-// 	}
-// }
-
 // to find cycles we use DFS because all edges reachable
 // by a vertex are traced before the vertex is finished
 func (e *employees) DFS(startingNode *Employee) {
