@@ -100,6 +100,75 @@ func (e *employees) findRootEmployee() *Employee {
 	return nil
 }
 
+// func (e *employees) createVisited() map[string]bool {
+//     visited := make(map[string]bool, len(e.data))
+//     for k := range e.data {
+//         visited[k] = false
+//     }
+//     return visited
+// }
+
+// func (e *employees) BFS(startingNode *Employee) {
+// 	visited := e.createVisited()
+// 	var q []string
+
+// 	visited[startingNode.Name] = true
+// 	q = append(q, startingNode.Name)
+
+// 	for len(q) > 0 {
+// 		var current string
+// 		current, q = q[0], q[1:]
+// 		fmt.Println("BFS", current)
+// 		for _, node := range e.data[current].Manages {
+// 			if !visited[node.Name] {
+// 				q = append(q, node.Name)
+// 				visited[node.Name] = true
+// 			}
+// 		}
+// 	}
+// }
+
+// to find cycles we use DFS because all edges reachable
+// by a vertex are traced before the vertex is finished
+func (e *employees) DFS(startingNode *Employee) {
+	// create visited map, set all names to false
+	visited := make(map[string]bool, len(e.data))
+	for k := range e.data {
+		visited[k] = false
+	}
+
+	// for all employees
+	for name, startingNode := range e.data {
+		if !visited[name] {
+			cycledetected := e.dfsRecursive(name, startingNode, visited)
+			if cycledetected {
+				fmt.Println("CYCLE")
+			}
+		}
+	}
+
+}
+
+func (e *employees) dfsRecursive(name string, parent *Employee, visited map[string]bool) bool {
+	visited[name] = true
+	fmt.Println("DFS", name)
+	// Go through each employee that is managed by vertex emp
+	for _, node := range e.data[name].Manages {
+		// if haven't visited, then go down that path
+		if !visited[node.Name] {
+			if e.dfsRecursive(node.Name, parent, visited) {
+				return true
+			}
+			// if visited and not parent of current node, then cycle
+			// nil check is for Jeff
+		} else if node.Manager != parent && parent.Manager != nil {
+			fmt.Println(node.Manager.Name, parent.Name)
+			return true
+		}
+	}
+	return false
+}
+
 // Recursively prints an Employee that manages and prints all Employee that reports to them
 func (e *employees) printManager(manager *Employee) {
 	// fmt.Printf(manager.Name + "\n")
@@ -172,6 +241,8 @@ func main() {
 
 	// Set relationships between Employee
 	employees.setRelations()
+	employees.DFS(employees.findRootEmployee())
+	fmt.Println("")
 
 	// Print the Employees
 	err = employees.printEmployeeStructure()
